@@ -116,8 +116,15 @@ impl Layer {
         }
     }
 
-    pub fn get_chunk(&self, chunk_pos: UVec2) -> Option<Entity> {
-        self.chunks[morton_index(chunk_pos)]
+    pub fn get_chunk(&self, chunk_pos: UVec2) -> Result<Entity, MapTileError> {
+        let index = morton_index(chunk_pos);
+        if self.chunks.len() <= index {
+            return Result::Err(MapTileError::OutOfBounds);
+        }
+        match self.chunks[morton_index(chunk_pos)] {
+            Some(chunk_entity) => Result::Ok(chunk_entity),
+            None => Result::Err(MapTileError::NonExistent),
+        }
     }
 
     /// Gets the map's size in tiles just for convenience.

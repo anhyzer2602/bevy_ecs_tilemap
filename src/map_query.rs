@@ -85,7 +85,7 @@ impl<'a> MapQuery<'a> {
                         tile_pos.x / layer.settings.chunk_size.x,
                         tile_pos.y / layer.settings.chunk_size.y,
                     );
-                    if let Some(chunk_entity) = layer.get_chunk(chunk_pos) {
+                    if let Ok(chunk_entity) = layer.get_chunk(chunk_pos) {
                         if let Ok((_, mut chunk)) =
                             self.chunk_query_set.q0_mut().get_mut(chunk_entity)
                         {
@@ -161,7 +161,7 @@ impl<'a> MapQuery<'a> {
                         tile_pos.x / layer.settings.chunk_size.x,
                         tile_pos.y / layer.settings.chunk_size.y,
                     );
-                    if let Some(chunk_entity) = layer.get_chunk(chunk_pos) {
+                    if let Ok(chunk_entity) = layer.get_chunk(chunk_pos) {
                         if let Ok((_, chunk)) = self.chunk_query_set.q1().get(chunk_entity) {
                             if let Some(tile) = chunk.get_tile_entity(chunk.to_chunk_pos(tile_pos))
                             {
@@ -200,7 +200,7 @@ impl<'a> MapQuery<'a> {
                         tile_pos.x / layer.settings.chunk_size.x,
                         tile_pos.y / layer.settings.chunk_size.y,
                     );
-                    if let Some(chunk_entity) = layer.get_chunk(chunk_pos) {
+                    if let Ok(chunk_entity) = layer.get_chunk(chunk_pos) {
                         if let Ok((_, mut chunk)) =
                             self.chunk_query_set.q0_mut().get_mut(chunk_entity)
                         {
@@ -246,7 +246,7 @@ impl<'a> MapQuery<'a> {
                                 tile_pos.x / layer.settings.chunk_size.x,
                                 tile_pos.y / layer.settings.chunk_size.y,
                             );
-                            if let Some(chunk_entity) = layer.get_chunk(chunk_pos) {
+                            if let Ok(chunk_entity) = layer.get_chunk(chunk_pos) {
                                 if let Ok((_, mut chunk)) =
                                     self.chunk_query_set.q0_mut().get_mut(chunk_entity)
                                 {
@@ -285,7 +285,7 @@ impl<'a> MapQuery<'a> {
                 if let Ok((_, layer)) = self.layer_query_set.q1().get(*layer_entity) {
                     for x in 0..layer.settings.map_size.x {
                         for y in 0..layer.settings.map_size.y {
-                            if let Some(chunk_entity) = layer.get_chunk(UVec2::new(x, y)) {
+                            if let Ok(chunk_entity) = layer.get_chunk(UVec2::new(x, y)) {
                                 commands.entity(chunk_entity).despawn_recursive();
                             }
                         }
@@ -387,7 +387,7 @@ impl<'a> MapQuery<'a> {
                         tile_pos.x / layer.settings.chunk_size.x,
                         tile_pos.y / layer.settings.chunk_size.y,
                     );
-                    if let Some(chunk_entity) = layer.get_chunk(chunk_pos) {
+                    if let Ok(chunk_entity) = layer.get_chunk(chunk_pos) {
                         if let Ok((_, chunk)) = self.chunk_query_set.q1().get(chunk_entity) {
                             if let Some(tile) = chunk.get_tile_entity(chunk.to_chunk_pos(tile_pos))
                             {
@@ -430,7 +430,7 @@ impl<'a> MapQuery<'a> {
                         tile_pos.x / layer.settings.chunk_size.x,
                         tile_pos.y / layer.settings.chunk_size.y,
                     );
-                    if let Some(chunk_entity) = layer.get_chunk(chunk_pos) {
+                    if let Ok(chunk_entity) = layer.get_chunk(chunk_pos) {
                         if let Ok((_, mut chunk)) =
                             self.chunk_query_set.q0_mut().get_mut(chunk_entity)
                         {
